@@ -1,9 +1,8 @@
 using UnityEngine;
-using static UnityEditor.PlayerSettings.SplashScreen;
 
 public class BaseCharacter : MonoBehaviour
 {
-    [SerializeField] float linearSpeed = 1f;
+    [SerializeField] float walkSpeed = 5f;
     Rigidbody2D rb2d;
 
     protected virtual void Awake()
@@ -16,9 +15,12 @@ public class BaseCharacter : MonoBehaviour
 
     }
 
-
     protected void Move(Vector2 direction)
     {
-        rb2d.linearVelocityX += direction.x * linearSpeed * Time.deltaTime;
+        //Move de todas las direcciones:
+        //rb2d.position += direction * walkSpeed * Time.deltaTime;
+
+        //Move de eje x:
+        rb2d.linearVelocityX = direction.x * walkSpeed;
     }
 }

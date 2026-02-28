@@ -6,6 +6,7 @@ public class PlayerCharacter : BaseCharacter
 {
     [SerializeField] InputActionReference move;
     Animator animator;
+    Vector2 rawMove;
 
     protected override void Awake()
     {
@@ -30,6 +31,11 @@ public class PlayerCharacter : BaseCharacter
         MoveAnimations();
     }
 
+    protected virtual void FixedUpdate()
+    {
+
+    }
+
     private void OnDisable()
     {
         move.action.Disable();
@@ -38,11 +44,11 @@ public class PlayerCharacter : BaseCharacter
         move.action.canceled -= OnMove;
     }
 
-    Vector2 rawMove;
     private void OnMove(InputAction.CallbackContext context)
     {
         rawMove = context.action.ReadValue<Vector2>();
     }
+
     private void MoveAnimations()
     {
         if (rawMove != Vector2.zero)
