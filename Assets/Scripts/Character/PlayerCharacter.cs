@@ -4,9 +4,17 @@ using UnityEngine.InputSystem.LowLevel;
 
 public class PlayerCharacter : BaseCharacter
 {
-    [SerializeField] InputActionReference move;
     Animator animator;
+
+    [Header("Sistema de movimiento")]
+    //Walk
+    [SerializeField] InputActionReference move;
     Vector2 rawMove;
+    //Jump
+    [SerializeField] float jumpForce = 5f;
+    [SerializeField] LayerMask groundLayer;
+    [SerializeField] int maxJumps = 2; // doble salto
+
 
     protected override void Awake()
     {
