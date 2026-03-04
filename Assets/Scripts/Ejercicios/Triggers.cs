@@ -19,6 +19,7 @@ public class Triggers : MonoBehaviour
     private int vidas = 3;
     [SerializeField] private TextMeshProUGUI textScore;
     [SerializeField] private TextMeshProUGUI textVidas;
+    [SerializeField] private GameObject buttonRetry;
 
     void Start()
     {
@@ -41,9 +42,17 @@ public class Triggers : MonoBehaviour
         }
         else if(elOtro.gameObject.CompareTag("Trampa"))
         {
-            transform.position = initialPosition;
             vidas--;
             textVidas.text = "Vidas: " + vidas;
+            if (score <= 0)
+            {
+                Destroy(this.gameObject);
+                buttonRetry.SetActive(true);
+            }
+            else
+            {
+                transform.position = initialPosition;
+            }                
         }
 
         //Destruir objeto referenciado:
