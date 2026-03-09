@@ -21,6 +21,10 @@ public class Triggers : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textVidas;
     [SerializeField] private GameObject buttonRetry;
 
+    //Teletransportador:
+    private GameObject currentTeleporter;
+    private Rigidbody2D rb;
+
     void Start()
     {
         initialPosition = transform.position;
@@ -71,5 +75,19 @@ public class Triggers : MonoBehaviour
         {
             ScriptTrampa.enabled = false;
         }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+
+        if (collision.CompareTag("teleport"))
+        {
+            currentTeleporter = collision.gameObject;
+            Teleport2 portalScript = collision.GetComponent<Teleport2>();
+            if (portalScript != null)
+            {
+                rb.gravityScale = portalScript.gravity;
+            }
+        }
+
     }
 }
